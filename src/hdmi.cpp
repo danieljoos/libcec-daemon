@@ -6,13 +6,13 @@
 
 #include <cstdio>
 
-std::ostream& operator<<(std::ostream &out, const HDMI::physical_address & address)
+std::ostream& HDMI::operator<<(std::ostream &out, const HDMI::physical_address & address)
 {
     return out << address[0] << '.' << address[1] << '.'
                << address[2] << '.' << address[3];
 }
 
-std::istream& operator>>(std::istream &in, HDMI::physical_address & address)
+std::istream& HDMI::operator>>(std::istream &in, HDMI::physical_address & address)
 {
     std::string s;
 
@@ -56,7 +56,7 @@ std::istream& operator>>(std::istream &in, HDMI::physical_address & address)
     return in;
 }
 
-std::istream& operator>>(std::istream &in, HDMI::address & address)
+std::istream& HDMI::operator>>(std::istream &in, HDMI::address & address)
 {
     char c = in.peek();
     if( c >= '0' && c <= '9' )
@@ -116,7 +116,7 @@ std::istream& operator>>(std::istream &in, HDMI::address & address)
     return in; 
 }
 
-std::ostream& operator<<(std::ostream &out, const HDMI::address & address)
+std::ostream& HDMI::operator<<(std::ostream &out, const HDMI::address & address)
 {
     switch( address.logical )
     {
