@@ -5,11 +5,17 @@ pkgdesc="Simple daemon to connect libcec to uinput"
 arch=('x86_64')
 url="https://github.com/bramp/libcec-daemon"
 license=('BSD2')
-depends=('libcec')
-makedepends=('libtool' 'log4cplus' 'boost')
+depends=('libcec' 'log4cplus')
+makedepends=('libtool' 'boost')
 provides=('libcec-daemon')
-source=('libcec-daemon::git+https://github.com/bramp/libcec-daemon')
-md5sums=('SKIP')
+source=('libcec-daemon::git+https://github.com/bramp/libcec-daemon'
+        'git-danieljoos-2c5db46cf00da581457635b6819325f617447176.patch'
+        '66-libcec-daemon.rules'
+        'libcec-daemon.service')
+md5sums=('SKIP'
+         'df12e7b0ff88e3d1f76d74b699e1ce3e'
+         '981006fb62fbc9a07b4b10c264467f5a'
+         '40836104ee421cf9e94b2113a12cdfdb')
 
 pkgver() {
   cd "$srcdir/libcec-daemon"
@@ -18,17 +24,22 @@ pkgver() {
 
 build() {
   cd "$srcdir"/libcec-daemon
-  patch -p0 < ../../hdmi_h_istreamable.patch
-  patch -p0 < ../../link_boost_system.patch
-  aclocal -I m4
-  autoreconf -vif
-  ./configure --prefix=/usr
+  patch -p0 < "$srcdir/git-danieljoos-2c5db46cf00da581457635b6819325f617447176.patch"
+
+  mkdir -p build
+  cd build
+
+  cmake ..
   make
 }
 
 package() {
-  cd "$srcdir"/libcec-daemon
-  make DESTDIR="$pkgdir/" install
+  install -d "$pkgdir/usr/bin"
+  install -d "$pkgdir/etc/udev/rules.d"
+  install -d "$pkgdir/usr/lib/systemd/system"
+  install "$srcdir/libcec-daemon/build/libcec-daemon" "$pkgdir/usr/bin/" 
+  install "$srcdir/66-libcec-daemon.rules" "$pkgdir/etc/udev/rules.d/"
+  install "$srcdir/libcec-daemon.service" "$pkgdir/usr/lib/systemd/system/"
 }
 
 
