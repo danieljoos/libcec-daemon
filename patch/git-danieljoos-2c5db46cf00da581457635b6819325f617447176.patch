@@ -1,8 +1,8 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
+diff --git CMakeLists.txt CMakeLists.txt
 new file mode 100644
 index 0000000..67255cb
 --- /dev/null
-+++ b/CMakeLists.txt
++++ CMakeLists.txt
 @@ -0,0 +1,20 @@
 +project(libcec-daemon)
 +cmake_minimum_required(VERSION 2.8)
@@ -24,10 +24,10 @@ index 0000000..67255cb
 +add_executable(libcec-daemon ${libcec-daemon_SOURCES})
 +target_link_libraries(libcec-daemon ${Boost_LIBRARIES} ${LOG4CPLUS_LIBRARIES} ${Cec_LIBRARIES} ${CMAKE_DL_LIBS})
 +
-diff --git a/Makefile.am b/Makefile.am
+diff --git Makefile.am Makefile.am
 deleted file mode 100644
 index b62cccd..0000000
---- a/Makefile.am
+--- Makefile.am
 +++ /dev/null
 @@ -1,13 +0,0 @@
 -AUTOMAKE_OPTIONS = subdir-objects
@@ -43,10 +43,10 @@ index b62cccd..0000000
 -                        src/main.h \
 -                        src/uinput.cpp \
 -                        src/uinput.h
-diff --git a/bootstrap b/bootstrap
+diff --git bootstrap bootstrap
 deleted file mode 100755
 index b0a16f4..0000000
---- a/bootstrap
+--- bootstrap
 +++ /dev/null
 @@ -1,19 +0,0 @@
 -#!/bin/sh
@@ -68,11 +68,11 @@ index b0a16f4..0000000
 -aclocal -I m4
 -#libtoolize
 -autoreconf -ivf
-diff --git a/cmake/FindCec.cmake b/cmake/FindCec.cmake
+diff --git cmake/FindCec.cmake cmake/FindCec.cmake
 new file mode 100644
 index 0000000..79106c5
 --- /dev/null
-+++ b/cmake/FindCec.cmake
++++ cmake/FindCec.cmake
 @@ -0,0 +1,13 @@
 +
 +find_path(Cec_INCLUDE_DIR libcec/cec.h)
@@ -87,11 +87,11 @@ index 0000000..79106c5
 +find_package_handle_standard_args(Cec DEFAULT_MSG Cec_LIBRARY Cec_INCLUDE_DIR)
 +mark_as_advanced(Cec Cec_INCLUDE_DIR Cec_LIBRARY)
 +
-diff --git a/cmake/FindLog4cplus.cmake b/cmake/FindLog4cplus.cmake
+diff --git cmake/FindLog4cplus.cmake cmake/FindLog4cplus.cmake
 new file mode 100644
 index 0000000..e2f0f4f
 --- /dev/null
-+++ b/cmake/FindLog4cplus.cmake
++++ cmake/FindLog4cplus.cmake
 @@ -0,0 +1,24 @@
 +# - Try to find Log4cplus
 +# Once done this will define
@@ -117,11 +117,11 @@ index 0000000..e2f0f4f
 +
 +mark_as_advanced(LOG4CPLUS_INCLUDE_DIR LOG4CPLUS_LIBRARY )
 +
-diff --git a/cmake/config.h.in b/cmake/config.h.in
+diff --git cmake/config.h.in cmake/config.h.in
 new file mode 100644
 index 0000000..43be4fa
 --- /dev/null
-+++ b/cmake/config.h.in
++++ cmake/config.h.in
 @@ -0,0 +1,22 @@
 +
 +/* Name of package */
@@ -145,10 +145,10 @@ index 0000000..43be4fa
 +/* Define to the version of this package. */
 +#define PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}"
 +
-diff --git a/configure.ac b/configure.ac
+diff --git configure.ac configure.ac
 deleted file mode 100644
 index 482e63e..0000000
---- a/configure.ac
+--- configure.ac
 +++ /dev/null
 @@ -1,40 +0,0 @@
 -AC_PREREQ([2.59])
@@ -191,10 +191,10 @@ index 482e63e..0000000
 -#
 -AC_CONFIG_FILES([Makefile])
 -AC_OUTPUT
-diff --git a/src/hdmi.cpp b/src/hdmi.cpp
+diff --git src/hdmi.cpp src/hdmi.cpp
 index 7bf9054..339ce1e 100644
---- a/src/hdmi.cpp
-+++ b/src/hdmi.cpp
+--- src/hdmi.cpp
++++ src/hdmi.cpp
 @@ -6,13 +6,13 @@
  
  #include <cstdio>
@@ -229,10 +229,10 @@ index 7bf9054..339ce1e 100644
  {
      switch( address.logical )
      {
-diff --git a/src/hdmi.h b/src/hdmi.h
+diff --git src/hdmi.h src/hdmi.h
 index bfd5c34..58ec43d 100644
---- a/src/hdmi.h
-+++ b/src/hdmi.h
+--- src/hdmi.h
++++ src/hdmi.h
 @@ -35,10 +35,11 @@ namespace HDMI
          CEC::cec_logical_address logical;
          uint8_t port;
@@ -250,10 +250,10 @@ index bfd5c34..58ec43d 100644
  
 -std::ostream& operator<<(std::ostream &out, const HDMI::address & address);
 -std::istream& operator>>(std::istream &in, HDMI::address & address);
-diff --git a/src/libcec.cpp b/src/libcec.cpp
+diff --git src/libcec.cpp src/libcec.cpp
 index 28b3763..abaac20 100644
---- a/src/libcec.cpp
-+++ b/src/libcec.cpp
+--- src/libcec.cpp
++++ src/libcec.cpp
 @@ -142,17 +142,17 @@ Cec::Cec(const char * name, CecCallback * callback)
  	strncpy(config.strDeviceName, name, sizeof(config.strDeviceName));
  	config.deviceTypes.Add(CEC_DEVICE_TYPE_RECORDING_DEVICE);
