@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 configure_file(${PROJECT_SOURCE_DIR}/cmake/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-find_package(Boost COMPONENTS thread system program_options chrono)
+find_package(Boost COMPONENTS thread system program_options)
 find_package(Log4cplus)
 find_package(Cec)
 
